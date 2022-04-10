@@ -7,8 +7,6 @@ module.exports = {
     videoPlayer: FRONTEND_JS + "videoPlayer.js",
     commentSection: FRONTEND_JS + "commentSection.js",
   },
-  mode: "development",
-  watch: true,
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/styles.css",
