@@ -1,0 +1,14 @@
+extends base.pug
+include mixins/video
+
+block content
+    form(method="GET").search__form
+        input(placeholder="검색",name="keyword", type="text")
+        button
+            i.fas.fa-search
+
+    div.video-grid
+        each video in videos 
+            +video(video)
+        else 
+            span.empty__message 비디오가 없습니다.

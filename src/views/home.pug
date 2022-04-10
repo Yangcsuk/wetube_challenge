@@ -1,0 +1,14 @@
+extends base
+include mixins/video
+
+block content
+    
+    if loggedIn
+        div.video-grid
+            each video in videos
+                +video(video)
+            else
+                li Sorry nothing found.
+    else
+        div.video__loginpls
+            p 영상은 로그인을 하시면 볼 수 있습니다.

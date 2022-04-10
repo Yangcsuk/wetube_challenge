@@ -1,0 +1,18 @@
+extends base
+
+
+block content
+    if errorMessage
+        span=errorMessage
+    form(method="POST")
+        input(placeholder="이름", name="name", type="text", required)
+        input(placeholder="이메일", name="email", type="email", required)
+        input(placeholder="아이디", name="username", type="text", required)
+        input(placeholder="비밀번호", name="password", type="password", required)
+        input(placeholder="비밀번호 확인", name="password2", type="password", required)
+        input(placeholder="살고있는 지역", name="location", type="text", required)
+        input(type="submit", value="가입하기")
+        include partials/social-login
+    div.auth-switch
+        span 이미 계정이 있으신가요? 
+        a(href="/login") 로그인하기 &rarr;

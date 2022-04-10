@@ -1,0 +1,30 @@
+header
+    a(href="/").header__logo
+        i.fab.fa-youtube 양튜브
+    nav
+        ul
+            li
+            if loggedIn                
+                li
+                    a(href="/users/edit") 프로필 수정
+                li
+                    a(href="/users/logout")  로그아웃
+                li
+                    a(href="/search")
+                        i.fas.fa-search
+                if loggedInUser.username === "admin"
+                    li
+                        a(href="/videos/upload") 영상업로드
+                    li
+                        a(href=`/users/${loggedInUser._id}`) 내영상 목록
+                                li
+                    a(href=`/users/${loggedInUser._id}`)
+                if !loggedInUser.avatarUrl === ""
+                    span 😀
+                else
+                    img.header__avatar(src=loggedInUser.avatarUrl)
+            else
+                li
+                    a(href="/join").header__btn  가입
+                li
+                    a(href="/login")  로그인                        
