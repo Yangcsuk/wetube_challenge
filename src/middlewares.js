@@ -15,12 +15,14 @@ const s3ImageUploader = multerS3({
   s3: s3,
   bucket: "yangtube2022/images",
   acl: "public-read",
+  contentType: multerS3.AUTO_CONTENT_TYPE,
 });
 
 const s3VideoUploader = multerS3({
   s3: s3,
   bucket: "yangtube2022/videos",
   acl: "public-read",
+  contentType: multerS3.AUTO_CONTENT_TYPE,
 });
 
 export const localsMiddleware = (req, res, next) => {
@@ -62,3 +64,22 @@ export const videoUpload = multer({
   },
   storage: isHeroku ? s3VideoUploader : undefined,
 });
+
+export const s3DeleteAvatarMiddleware = (req, res, next) => {
+  if (!req.file) {
+    return next();
+  }
+  s3.deleteObject(
+    {
+      Bucket: `yangtube2022`,
+      Key: `images/${req.session.user.avatarURL.split("/")[4]}`,
+    },
+    (err, data) => {
+      if (err) {
+        throw err;
+      }
+      console.log(`s3 deleteObject`, data);
+    }
+  );
+  next();
+};
