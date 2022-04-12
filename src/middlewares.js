@@ -4,8 +4,9 @@ import aws from "aws-sdk";
 
 const s3 = new aws.S3({
   credentials: {
-    accessKeyId: process.env.AWS_ID,
-    secretAccessKey: process.env.AWS_SECRET,
+    accessKeyId: process.env.WASABI_ID,
+    secretAccessKey: process.env.WASABI_SECRET,
+    region: "us-west-1", //와사비 전용 서버지역 설정
   },
 });
 
@@ -13,14 +14,14 @@ const isHeroku = process.env.NODE_ENV === "production";
 
 const s3ImageUploader = multerS3({
   s3: s3,
-  bucket: "yangtube2022/images",
+  bucket: "ygtube-wasabi/images",
   acl: "public-read",
   contentType: multerS3.AUTO_CONTENT_TYPE,
 });
 
 const s3VideoUploader = multerS3({
   s3: s3,
-  bucket: "yangtube2022/videos",
+  bucket: "ygtube-wasabi/videos",
   acl: "public-read",
   contentType: multerS3.AUTO_CONTENT_TYPE,
 });
