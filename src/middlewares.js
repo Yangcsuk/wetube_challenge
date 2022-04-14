@@ -12,16 +12,11 @@ const s3 = new S3({
   secretAccessKey: process.env.WASABI_SECRET,
 });
 
-const wasabiUpload = s3.putObject(
-  {
-    Bucket: "ygtube-wasabi",
-  },
-  (err, data) => {
-    if (err) {
-      console.log(err);
-    }
-  }
-);
+const wasabiUpload = s3.putObject({
+  Body: "hello World",
+  Bucket: "ygtube-wasabi",
+  Key: "Name",
+});
 
 /* const s3 = new aws.S3({
   credentials: {
