@@ -1,9 +1,10 @@
 import multer from "multer";
 import multerS3 from "multer-s3";
-import aws from "aws-sdk";
+import AWS from "aws-sdk";
 
+/*
 const S3 = require("aws-sdk/clients/s3");
-const wasabiEndpoint = new aws.Endpoint("s3.us-west-1.wasabisys.com");
+const wasabiEndpoint = new AWS.Endpoint("s3.us-west-1.wasabisys.com");
 
 const s3 = new S3({
   endpoint: wasabiEndpoint,
@@ -12,18 +13,19 @@ const s3 = new S3({
   secretAccessKey: process.env.WASABI_SECRET,
 });
 
-const wasabiUpload = s3.putObject({
+export const wasabiUpload = s3.putObject({
   Body: "hello World",
   Bucket: "ygtube-wasabi",
   Key: "Name",
 });
+*/
 
-/* const s3 = new aws.S3({
+const s3 = new AWS.S3({
   credentials: {
     accessKeyId: process.env.AWS_ID,
     secretAccessKey: process.env.AWS_SECRET,
   },
-}); */
+});
 
 const s3ImageUploader = multerS3({
   s3: s3,
@@ -78,7 +80,7 @@ export const videoUpload = multer({
   limits: {
     fileSize: 1000000000,
   },
-  storage: isHeroku ? wasabiUpload : undefined,
+  storage: isHeroku ? s3VideoUploader : undefined,
 });
 
 export const s3DeleteAvatarMiddleware = (req, res, next) => {
